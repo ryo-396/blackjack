@@ -1,0 +1,861 @@
+import tkinter 
+import random
+import sys
+
+
+#１１、１２、１３を１０と定義する
+J = 10
+Q = 10
+K = 10
+
+#数字ランダムリスト
+num = [1,2,3,4,5,6,7,8,9,10,J,Q,K] 
+
+#ランダムで取得した数字をリストに入れる
+players_sum = []
+dealers_sum = []
+
+def vp_start_gui():
+    global app
+    app = tkinter.Tk() #アプリの作成
+
+    #アプリ画面の設定
+    app.geometry("1000x600") #アプリ画面のサイズ
+    app.resizable(width=0, height=0) # resize できないように指定
+    app.title("ブラックジャック") #アプリのタイトル
+
+    #キャンバスの設定
+    canvas = tkinter.Canvas(app, width = 1100, height = 700)
+    canvas.place(x=-10, y=-10)
+    canvas.create_rectangle(0, 300, 1100, 700, fill = '#CE0606')
+    canvas.create_oval(-380, -1000, 1400, 600, fill = '#00793D')
+
+
+    ##title##
+    #blackjack_title = tkinter.PhotoImage(file="blackjack-title.png")
+    #canvas.create_image(260, 20, image= blackjack_title, anchor=tkinter.NW)
+    title = tkinter.Label(app, font = ("times new roman", 63), text = "♠︎❤︎BLACK JACK♣︎♦︎", foreground = "white", background = "black", width = 32)
+    title.place(relx = 0, rely = 0)
+
+    ##トランプ画像##
+    sa = tkinter.PhotoImage(file="torannpu-illust1.png")
+    s2 = tkinter.PhotoImage(file="torannpu-illust2.png")
+    s3 = tkinter.PhotoImage(file="torannpu-illust3.png")
+    s4 = tkinter.PhotoImage(file="torannpu-illust4.png")
+    s5 = tkinter.PhotoImage(file="torannpu-illust5.png")
+    s6 = tkinter.PhotoImage(file="torannpu-illust6.png")
+    s7 = tkinter.PhotoImage(file="torannpu-illust7.png")
+    s8 = tkinter.PhotoImage(file="torannpu-illust8.png")
+    s9 = tkinter.PhotoImage(file="torannpu-illust9.png")
+    s10 = tkinter.PhotoImage(file="torannpu-illust10.png")
+    s11 = tkinter.PhotoImage(file="torannpu-illust11.png")
+    s12 = tkinter.PhotoImage(file="torannpu-illust12.png")
+    s13 = tkinter.PhotoImage(file="torannpu-illust13.png")
+ 
+    
+    #Hitボタンを押したときの動き
+    def hit():
+        if sum(players_sum) > 21:
+            pass
+        elif sum(dealers_sum) > 21:
+            pass
+        elif 17 <= sum(dealers_sum) <= 21:
+            if sum(players_sum) > sum(dealers_sum):
+                pass
+            elif sum(players_sum) < sum(dealers_sum):
+                pass
+            else:
+                pass
+        else:
+            players_sum.append(random.choice(num))
+            L8 = tkinter.Label(app, font = ("System", 15), text = str(sum(players_sum)), foreground='white', background='#D8412F')
+            L8.place(relx = 0.8, rely = 0.6)
+
+        if sum(players_sum) > 21:
+            L10 = tkinter.Label(app, font = ("times new roman", 40), text = "You Lose...", fg = "blue", bg = "#00793D")
+            L10.place(relx = 0.8, rely = 0.5)
+            button1["state"] = tkinter.DISABLED
+            button2["state"] = tkinter.DISABLED
+                    
+    #Aが出た時
+        def buttonA11_clicked():
+            players_sum.remove(1)
+            players_sum.append(11)
+            L8 = tkinter.Label(app, font = ("System", 15), text = str(sum(players_sum)), foreground='white', background='#D8412F')
+            L8.place(relx = 0.8, rely = 0.6)  
+
+
+    #プレイヤー3枚目のカード
+        if len(players_sum) < 3:
+            pass
+        elif len(players_sum) == 3:
+            if players_sum[2] in [1] :
+                canvas.create_image(350, 340, image= sa, anchor=tkinter.NW)
+
+                buttonA1 = tkinter.Button(app, text = "1",command = lambda:[buttonA1.destroy(), buttonA11.destroy()])
+                buttonA1.place(relx = 0.47, rely = 0.8)
+
+                buttonA11 = tkinter.Button(app, text = "11",command = lambda:[buttonA11_clicked(), buttonA1.destroy(), buttonA11.destroy()])
+                buttonA11.place(relx = 0.51, rely = 0.8)
+
+            if  players_sum[2] in [2]:
+                canvas.create_image(350, 340, image= s2, anchor=tkinter.NW)
+
+            if  players_sum[2] in [3]:
+                canvas.create_image(350, 340, image= s3, anchor=tkinter.NW)
+
+            if  players_sum[2] in [4]:
+                canvas.create_image(350, 340, image= s4, anchor=tkinter.NW)
+
+            if  players_sum[2] in [5]:
+                canvas.create_image(350, 340, image= s5, anchor=tkinter.NW)
+
+            if  players_sum[2] in [6]:
+                canvas.create_image(350, 340, image= s6, anchor=tkinter.NW)
+
+            if  players_sum[2] in [7]:
+                canvas.create_image(350, 340, image= s7, anchor=tkinter.NW)
+
+            if  players_sum[2] in [8]:
+                canvas.create_image(350, 340, image= s8, anchor=tkinter.NW)
+
+            if  players_sum[2] in [9]:
+                canvas.create_image(350, 340, image= s9, anchor=tkinter.NW)
+
+            if  players_sum[2] in [10]:
+                canvas.create_image(350, 340, image= s10, anchor=tkinter.NW)
+
+            if  players_sum[2] in [Q]:
+                canvas.create_image(350, 340, image= s12, anchor=tkinter.NW)
+
+            if  players_sum[2] in [K]:
+                canvas.create_image(350, 340, image= s13, anchor=tkinter.NW)
+
+            if  players_sum[2] in [J]:
+                canvas.create_image(350, 340, image= s11, anchor=tkinter.NW)
+
+    #プレイヤー4枚目のカード
+        if len(players_sum) < 4:
+            pass
+        elif len(players_sum) == 4:
+            if players_sum[3] in [1] :
+                canvas.create_image(450, 340, image= sa, anchor=tkinter.NW)
+
+                buttonA1 = tkinter.Button(app, text = "1",command = lambda:[buttonA1.destroy(), buttonA11.destroy()])
+                buttonA1.place(relx = 0.47, rely = 0.8)
+
+                buttonA11 = tkinter.Button(app, text = "11",command = lambda:[buttonA11_clicked(), buttonA1.destroy(), buttonA11.destroy()])
+                buttonA11.place(relx = 0.51, rely = 0.8)
+
+            if  players_sum[3] in [2]:
+                canvas.create_image(450, 340, image= s2, anchor=tkinter.NW)
+
+            if  players_sum[3] in [3]:
+                canvas.create_image(450, 340, image= s3, anchor=tkinter.NW)
+
+            if  players_sum[3] in [4]:
+                canvas.create_image(450, 340, image= s4, anchor=tkinter.NW)
+
+            if  players_sum[3] in [5]:
+                canvas.create_image(450, 340, image= s5, anchor=tkinter.NW)
+
+            if  players_sum[3] in [6]:
+                canvas.create_image(450, 340, image= s6, anchor=tkinter.NW)
+
+            if  players_sum[3] in [7]:
+                canvas.create_image(450, 340, image= s7, anchor=tkinter.NW)
+
+            if  players_sum[3] in [8]:
+                canvas.create_image(450, 340, image= s8, anchor=tkinter.NW)
+
+            if  players_sum[3] in [9]:
+                canvas.create_image(450, 340, image= s9, anchor=tkinter.NW)
+
+            if  players_sum[3] in [10]:
+                canvas.create_image(450, 340, image= s10, anchor=tkinter.NW)
+
+            if  players_sum[3] in [J]:
+                canvas.create_image(450, 340, image= s11, anchor=tkinter.NW)
+
+            if  players_sum[3] in [K]:
+                canvas.create_image(450, 340, image= s13, anchor=tkinter.NW)
+
+            if  players_sum[3] in [Q]:
+                canvas.create_image(450, 340, image= s12, anchor=tkinter.NW)
+
+    #プレイヤー5枚目のカード
+        if len(players_sum) < 5:
+            pass
+        elif len(players_sum) == 5:
+            if players_sum[4] in [1] :
+                canvas.create_image(550, 340, image= sa, anchor=tkinter.NW)
+
+                buttonA1 = tkinter.Button(app, text = "1",command = lambda:[buttonA1.destroy(), buttonA11.destroy()])
+                buttonA1.place(relx = 0.47, rely = 0.8)
+
+                buttonA11 = tkinter.Button(app, text = "11",command = lambda:[buttonA11_clicked(), buttonA1.destroy(), buttonA11.destroy()])
+                buttonA11.place(relx = 0.51, rely = 0.8)
+
+            if  players_sum[4] in [2]:
+                canvas.create_image(550, 340, image= s2, anchor=tkinter.NW)
+
+            if  players_sum[4] in [3]:
+                canvas.create_image(550, 340, image= s3, anchor=tkinter.NW)
+
+            if  players_sum[4] in [4]:
+                canvas.create_image(550, 340, image= s4, anchor=tkinter.NW)
+
+            if  players_sum[4] in [5]:
+                canvas.create_image(550, 340, image= s5, anchor=tkinter.NW)
+
+            if  players_sum[4] in [6]:
+                canvas.create_image(550, 340, image= s6, anchor=tkinter.NW)
+
+            if  players_sum[4] in [7]:
+                canvas.create_image(550, 340, image= s7, anchor=tkinter.NW)
+
+            if  players_sum[4] in [8]:
+                canvas.create_image(550, 340, image= s8, anchor=tkinter.NW)
+
+            if  players_sum[4] in [9]:
+                canvas.create_image(550, 340, image= s9, anchor=tkinter.NW)
+
+            if  players_sum[4] in [10]:
+                canvas.create_image(550, 340, image= s10, anchor=tkinter.NW)
+
+            if  players_sum[4] in [J]:
+                canvas.create_image(550, 340, image= s11, anchor=tkinter.NW)
+
+            if  players_sum[4] in [Q]:
+                canvas.create_image(550, 340, image= s12, anchor=tkinter.NW)
+
+            if  players_sum[4] in [K]:
+                canvas.create_image(550, 340, image= s13, anchor=tkinter.NW)
+
+    #プレイヤー6枚目のカード
+        if len(players_sum) < 6:
+            pass
+        elif len(players_sum) == 6:
+            if players_sum[5] in [1] :
+                canvas.create_image(650, 340, image= sa, anchor=tkinter.NW)
+
+                buttonA1 = tkinter.Button(app, text = "1",command = lambda:[buttonA1.destroy(), buttonA11.destroy()])
+                buttonA1.place(relx = 0.47, rely = 0.8)
+
+                buttonA11 = tkinter.Button(app, text = "11",command = lambda:[buttonA11_clicked(), buttonA1.destroy(), buttonA11.destroy()])
+                buttonA11.place(relx = 0.51, rely = 0.8)
+
+            if  players_sum[5] in [2]:
+                canvas.create_image(650, 340, image= s2, anchor=tkinter.NW)
+
+            if  players_sum[5] in [3]:
+                canvas.create_image(650, 340, image= s3, anchor=tkinter.NW)
+
+            if  players_sum[5] in [4]:
+                canvas.create_image(650, 340, image= s4, anchor=tkinter.NW)
+
+            if  players_sum[5] in [5]:
+                canvas.create_image(650, 340, image= s5, anchor=tkinter.NW)
+
+            if  players_sum[5] in [6]:
+                canvas.create_image(650, 340, image= s6, anchor=tkinter.NW)
+
+            if  players_sum[5] in [7]:
+                canvas.create_image(650, 340, image= s7, anchor=tkinter.NW)
+
+            if  players_sum[5] in [8]:
+                canvas.create_image(650, 340, image= s8, anchor=tkinter.NW)
+
+            if  players_sum[5] in [9]:
+                canvas.create_image(650, 340, image= s9, anchor=tkinter.NW)
+
+            if  players_sum[5] in [10]:
+                canvas.create_image(650, 340, image= s10, anchor=tkinter.NW)
+
+            if  players_sum[5] in [J]:
+                canvas.create_image(650, 340, image= s11, anchor=tkinter.NW)
+
+            if  players_sum[5] in [Q]:
+                canvas.create_image(650, 340, image= s12, anchor=tkinter.NW)
+
+            if  players_sum[5] in [K]:
+                canvas.create_image(650, 340, image= s13, anchor=tkinter.NW)
+
+
+    def stand():
+        if sum(players_sum) > 21:
+            pass
+        elif sum(dealers_sum) > 21:
+            pass
+        elif 17 <= sum(dealers_sum) <= 21:
+            if sum(players_sum) > sum(dealers_sum):
+                pass
+            elif sum(players_sum) < sum(dealers_sum):
+                pass
+            else:
+                pass
+        else:
+            dealers_sum.append(random.choice(num))        
+            L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+            L9.place(relx = 0.8, rely = 0.3)
+            
+        #自動オープン
+        if sum(dealers_sum) < 17:
+            auto1 = app.after(1800, stand)
+            
+
+        #結果 
+        def result():
+            if sum(dealers_sum) > 21:
+                result1 = tkinter.Label(app, font = ("times new roman", 40), text = "You Win", foreground = "red", bg = "#00793D")
+                result1.place(relx = 0.8, rely = 0.5)
+            elif 17 <= sum(dealers_sum) <= 21:
+                if sum(players_sum) > sum(dealers_sum):
+                    result1 = tkinter.Label(app, font = ("times new roman", 40), text = "You Win", foreground = "red", bg = "#00793D")
+                    result1.place(relx = 0.8, rely = 0.5)
+                elif sum(players_sum) < sum(dealers_sum):
+                    result2 = tkinter.Label(app, font = ("times new roman", 40), text = "You Lose...", foreground = "blue", bg = "#00793D")
+                    result2.place(relx = 0.8, rely = 0.5)
+                else:
+                    result3 = tkinter.Label(app, font = ("times new roman", 40), text = "Draw", foreground = "grey", bg = "#00793D")
+                    result3.place(relx = 0.8, rely = 0.5)
+        result()
+                    
+        
+        if sum(dealers_sum) > 21:
+            button1["state"] = tkinter.DISABLED
+            button2["state"] = tkinter.DISABLED
+        elif 17 <= sum(dealers_sum) <= 21:
+            button1["state"] = tkinter.DISABLED
+            button2["state"] = tkinter.DISABLED
+
+
+        #ディーラー2枚目のカード画像
+        if len(dealers_sum) < 2:
+            pass
+        else:
+            if dealers_sum[1] in [1,11] :
+                canvas.create_image(250, 160, image= sa, anchor=tkinter.NW)
+                if 6 < sum(dealers_sum) < 12:
+                    dealers_sum.remove(1)
+                    dealers_sum.append(11)
+                    L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+                    L9.place(relx = 0.8, rely = 0.3)
+                    if sum(dealers_sum) > 16:
+                        app.after_cancel(auto1)
+                        result()
+
+            if  dealers_sum[1] in [2]:
+                canvas.create_image(250, 160, image= s2, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [3]:
+                canvas.create_image(250, 160, image= s3, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [4]:
+                canvas.create_image(250, 160, image= s4, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [5]:
+                canvas.create_image(250, 160, image= s5, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [6]:
+                canvas.create_image(250, 160, image= s6, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [7]:
+                canvas.create_image(250, 160, image= s7, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [8]:
+                canvas.create_image(250, 160, image= s8, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [9]:
+                canvas.create_image(250, 160, image= s9, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [J]:
+                canvas.create_image(250, 160, image= s11, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [Q]:
+                canvas.create_image(250, 160, image= s12, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [K]:
+                canvas.create_image(250, 160, image= s13, anchor=tkinter.NW)
+
+            if  dealers_sum[1] in [10]:
+                canvas.create_image(250, 160, image= s10, anchor=tkinter.NW)
+
+
+    #ディーラー3枚目のカード画像
+        if len(dealers_sum) < 3:
+            pass
+        else:
+            if dealers_sum[2] in [1,11] :
+                canvas.create_image(350, 160, image= sa, anchor=tkinter.NW)
+                if 6 < sum(dealers_sum) < 12:
+                    dealers_sum.remove(1)
+                    dealers_sum.append(11)
+                    L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+                    L9.place(relx = 0.8, rely = 0.3)
+                    if sum(dealers_sum) > 16:
+                        app.after_cancel(auto1)
+                        result()
+
+            if  dealers_sum[2] in [2]:
+                canvas.create_image(350, 160, image= s2, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [3]:
+                canvas.create_image(350, 160, image= s3, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [4]:
+                canvas.create_image(350, 160, image= s4, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [5]:
+                canvas.create_image(350, 160, image= s5, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [6]:
+                canvas.create_image(350, 160, image= s6, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [7]:
+                canvas.create_image(350, 160, image= s7, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [8]:
+                canvas.create_image(350, 160, image= s8, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [9]:
+                canvas.create_image(350, 160, image= s9, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [10]:
+                canvas.create_image(350, 160, image= s10, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [J]:
+                canvas.create_image(350, 160, image= s11, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [K]:
+                canvas.create_image(350, 160, image= s13, anchor=tkinter.NW)
+
+            if  dealers_sum[2] in [Q]:
+                canvas.create_image(350, 160, image= s12, anchor=tkinter.NW)
+
+
+    #ディーラー4枚目のカード画像
+        if len(dealers_sum) < 4:
+            pass
+        else:
+            if dealers_sum[3] in [1,11] :
+                canvas.create_image(450, 160, image= sa, anchor=tkinter.NW)
+                if 6 < sum(dealers_sum) < 12:
+                    dealers_sum.remove(1)
+                    dealers_sum.append(11)
+                    L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+                    L9.place(relx = 0.8, rely = 0.3)
+                    if sum(dealers_sum) > 16:
+                        app.after_cancel(auto1)
+                        result()
+
+            if  dealers_sum[3] in [2]:
+                canvas.create_image(450, 160, image= s2, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [3]:
+                canvas.create_image(450, 160, image= s3, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [4]:
+                canvas.create_image(450, 160, image= s4, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [5]:
+                canvas.create_image(450, 160, image= s5, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [6]:
+                canvas.create_image(450, 160, image= s6, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [7]:
+                canvas.create_image(450, 160, image= s7, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [8]:
+                canvas.create_image(450, 160, image= s8, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [9]:
+                canvas.create_image(450, 160, image= s9, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [10]:
+                canvas.create_image(450, 160, image= s10, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [J]:
+                canvas.create_image(450, 160, image= s11, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [Q]:
+                canvas.create_image(450, 160, image= s12, anchor=tkinter.NW)
+
+            if  dealers_sum[3] in [K]:
+                canvas.create_image(450, 160, image= s13, anchor=tkinter.NW)
+
+
+    #ディーラー5枚目のカード画像
+        if len(dealers_sum) < 5:
+            pass
+        else:
+            if dealers_sum[4] in [1,11] :
+                canvas.create_image(550, 160, image= sa, anchor=tkinter.NW)
+                if 6 < sum(dealers_sum) < 12:
+                    dealers_sum.remove(1)
+                    dealers_sum.append(11)
+                    L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+                    L9.place(relx = 0.8, rely = 0.3)
+                    if sum(dealers_sum) > 16:
+                        app.after_cancel(auto1)
+                        result()
+
+            if  dealers_sum[4] in [2]:
+                canvas.create_image(550, 160, image= s2, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [3]:
+                canvas.create_image(550, 160, image= s3, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [4]:
+                canvas.create_image(550, 160, image= s4, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [5]:
+                canvas.create_image(550, 160, image= s5, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [6]:
+                canvas.create_image(550, 160, image= s6, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [7]:
+                canvas.create_image(550, 160, image= s7, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [8]:
+                canvas.create_image(550, 160, image= s8, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [9]:
+                canvas.create_image(550, 160, image= s9, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [10]:
+                canvas.create_image(550, 160, image= s10, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [Q]:
+                canvas.create_image(550, 160, image= s12, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [K]:
+                canvas.create_image(550, 160, image= s13, anchor=tkinter.NW)
+
+            if  dealers_sum[4] in [J]:
+                canvas.create_image(550, 160, image= s11, anchor=tkinter.NW)
+
+        #ディーラー6枚目のカード画像
+        if len(dealers_sum) < 6:
+            pass
+        else:
+            if dealers_sum[5] in [1,11] :
+                canvas.create_image(650, 160, image= sa, anchor=tkinter.NW)
+                if 6 < sum(dealers_sum) < 12:
+                    dealers_sum.remove(1)
+                    dealers_sum.append(11)
+                    L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+                    L9.place(relx = 0.8, rely = 0.3)
+                    if sum(dealers_sum) > 16:
+                        app.after_cancel(auto1)
+                        result()
+
+            if  dealers_sum[5] in [2]:
+                canvas.create_image(650, 160, image= s2, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [3]:
+                canvas.create_image(650, 160, image= s3, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [4]:
+                canvas.create_image(650, 160, image= s4, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [5]:
+                canvas.create_image(650, 160, image= s5, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [6]:
+                canvas.create_image(650, 160, image= s6, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [7]:
+                canvas.create_image(650, 160, image= s7, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [8]:
+                canvas.create_image(650, 160, image= s8, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [9]:
+                canvas.create_image(650, 160, image= s9, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [10]:
+                canvas.create_image(650, 160, image= s10, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [Q]:
+                canvas.create_image(650, 160, image= s12, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [K]:
+                canvas.create_image(650, 160, image= s13, anchor=tkinter.NW)
+
+            if  dealers_sum[5] in [J]:
+                canvas.create_image(650, 160, image= s11, anchor=tkinter.NW)
+        result()
+        
+        if sum(dealers_sum) > 21:
+            button1["state"] = tkinter.DISABLED
+            button2["state"] = tkinter.DISABLED
+        elif 17 <= sum(dealers_sum) <= 21:
+            if sum(players_sum) > sum(dealers_sum):
+                button1["state"] = tkinter.DISABLED
+                button2["state"] = tkinter.DISABLED
+            elif sum(players_sum) < sum(dealers_sum):
+                button1["state"] = tkinter.DISABLED
+                button2["state"] = tkinter.DISABLED
+            else:
+                button1["state"] = tkinter.DISABLED
+                button2["state"] = tkinter.DISABLED
+                
+    #ヒット、スタンドボタンの定義
+    button1 = tkinter.Button(app, text = "HIT", command = hit, fg = "orange", bg = "black")
+    button2 = tkinter.Button(app, text = "STAND", command = stand, fg = "purple", bg = "black")
+
+
+        
+    #スタートボタン押した時の動き
+    def button_clicked():
+        L1 = tkinter.Label(app, font = ("System", 15), text = "Dealer's Hand", foreground='white', background='#008DCB' )
+        L1.place(relx = 0.1, rely = 0.2)
+
+        L2 = tkinter.Label(app, font = ("System", 15), text = "Your Hand", foreground='white', background='#D8412F')
+        L2.place(relx = 0.1, rely = 0.5)
+
+
+        #ディーラーの1枚目
+        dealers_sum.append(random.choice(num))
+
+
+        #プレイヤーの1枚目
+        players_sum.append(random.choice(num))
+        players_sum.append(random.choice(num))
+
+
+        #それぞれの合計点の表示
+        L8 = tkinter.Label(app, font = ("System", 15), text = str(sum(players_sum)), foreground='white', background='#D8412F')
+        L8.place(relx = 0.8, rely = 0.6)    
+
+        L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+        L9.place(relx = 0.8, rely = 0.3)
+
+        
+
+        #Hitボタンの配置
+        button1.place(relx=0.38, rely=0.9)
+         
+        #Standボタンの配置
+        button2.place(relx=0.58, rely=0.9)
+
+
+        
+        #Aが出た時
+        def buttonA11_clicked():
+            players_sum.remove(1)
+            players_sum.append(11)
+            L8 = tkinter.Label(app, font = ("System", 15), text = str(sum(players_sum)), foreground='white', background='#D8412F')
+            L8.place(relx = 0.8, rely = 0.6)    
+
+        if players_sum[0] in [1]:
+            buttonA1 = tkinter.Button(app, text = "1",command = lambda:[buttonA1.destroy(), buttonA11.destroy()])
+            buttonA1.place(relx = 0.47, rely = 0.8)
+
+            buttonA11 = tkinter.Button(app, text = "11",command = lambda:[buttonA11_clicked(), buttonA1.destroy(), buttonA11.destroy()])
+            buttonA11.place(relx = 0.51, rely = 0.8)
+
+        if players_sum[1] in [1]:
+            buttonA1 = tkinter.Button(app, text = "1",command = lambda:[buttonA1.destroy(), buttonA11.destroy()])
+            buttonA1.place(relx = 0.47, rely = 0.8)
+
+            buttonA11 = tkinter.Button(app, text = "11",command = lambda:[buttonA11_clicked(), buttonA1.destroy(), buttonA11.destroy()])
+            buttonA11.place(relx = 0.51, rely = 0.8)
+
+
+
+        #プレイヤー1枚目のカード画像
+        if players_sum[0] in [1] :
+            canvas.create_image(150, 340, image= sa, anchor=tkinter.NW)
+
+        if  players_sum[0] in [2]:
+            canvas.create_image(150, 340, image= s2, anchor=tkinter.NW)
+
+        if  players_sum[0] in [3]:
+            canvas.create_image(150, 340, image= s3, anchor=tkinter.NW)
+
+        if  players_sum[0] in [4]:
+            canvas.create_image(150, 340, image= s4, anchor=tkinter.NW)
+
+        if  players_sum[0] in [5]:
+            canvas.create_image(150, 340, image= s5, anchor=tkinter.NW)
+
+        if  players_sum[0] in [6]:
+            canvas.create_image(150, 340, image= s6, anchor=tkinter.NW)
+
+        if  players_sum[0] in [7]:
+            canvas.create_image(150, 340, image= s7, anchor=tkinter.NW)
+
+        if  players_sum[0] in [8]:
+            canvas.create_image(150, 340, image= s8, anchor=tkinter.NW)
+
+        if  players_sum[0] in [9]:
+            canvas.create_image(150, 340, image= s9, anchor=tkinter.NW)
+
+        if  players_sum[0] in [10]:
+            canvas.create_image(150, 340, image= s10, anchor=tkinter.NW)
+
+        if  players_sum[0] in [J]:
+            canvas.create_image(150, 340, image= s11, anchor=tkinter.NW)
+
+        if  players_sum[0] in [Q]:
+            canvas.create_image(150, 340, image= s12, anchor=tkinter.NW)
+
+        if  players_sum[0] in [K]:
+            canvas.create_image(150, 340, image= s13, anchor=tkinter.NW)
+
+    #プレイヤー2枚目のカード画像
+        if players_sum[1] in [1] :
+            canvas.create_image(250, 340, image= sa, anchor=tkinter.NW)
+
+        if  players_sum[1] in [2]:
+            canvas.create_image(250, 340, image= s2, anchor=tkinter.NW)
+
+        if  players_sum[1] in [3]:
+            canvas.create_image(250, 340, image= s3, anchor=tkinter.NW)
+
+        if  players_sum[1] in [4]:
+            canvas.create_image(250, 340, image= s4, anchor=tkinter.NW)
+
+        if  players_sum[1] in [5]:
+            canvas.create_image(250, 340, image= s5, anchor=tkinter.NW)
+
+        if  players_sum[1] in [6]:
+            canvas.create_image(250, 340, image= s6, anchor=tkinter.NW)
+
+        if  players_sum[1] in [7]:
+            canvas.create_image(250, 340, image= s7, anchor=tkinter.NW)
+
+        if  players_sum[1] in [8]:
+            canvas.create_image(250, 340, image= s8, anchor=tkinter.NW)
+
+        if  players_sum[1] in [9]:
+            canvas.create_image(250, 340, image= s9, anchor=tkinter.NW)
+
+        if  players_sum[1] in [J]:
+            canvas.create_image(250, 340, image= s11, anchor=tkinter.NW)
+
+        if  players_sum[1] in [Q]:
+            canvas.create_image(250, 340, image= s12, anchor=tkinter.NW)
+
+        if  players_sum[1] in [K]:
+            canvas.create_image(250, 340, image= s13, anchor=tkinter.NW)
+
+        if  players_sum[1] in [10]:
+            canvas.create_image(250, 340, image= s10, anchor=tkinter.NW)
+
+
+        #ディーラー1枚目のカード画像
+        if dealers_sum[0] in [1,11] :
+            canvas.create_image(150, 160, image= sa, anchor=tkinter.NW)
+            if 5 < sum(dealers_sum) < 12:
+                dealers_sum.remove(1)
+                dealers_sum.append(11)
+                L9 = tkinter.Label(app, font = ("System", 15), text = str(sum(dealers_sum)), foreground='white', background='#008DCB')
+                L9.place(relx = 0.8, rely = 0.3)
+
+        if  dealers_sum[0] in [2]:
+            canvas.create_image(150, 160, image= s2, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [3]:
+            canvas.create_image(150, 160, image= s3, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [4]:
+            canvas.create_image(150, 160, image= s4, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [5]:
+            canvas.create_image(150, 160, image= s5, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [6]:
+            canvas.create_image(150, 160, image= s6, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [7]:
+            canvas.create_image(150, 160, image= s7, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [8]:
+            canvas.create_image(150, 160, image= s8, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [9]:
+            canvas.create_image(150, 160, image= s9, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [10]:
+            canvas.create_image(150, 160, image= s10, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [Q]:
+            canvas.create_image(150, 160, image= s12, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [K]:
+            canvas.create_image(150, 160, image= s13, anchor=tkinter.NW)
+
+        if  dealers_sum[0] in [J]:
+            canvas.create_image(150, 160, image= s11, anchor=tkinter.NW)
+
+
+
+    # ゲームスタートボタンを作成
+    button = tkinter.Button(app, text = "Game Start",command = lambda:[button_clicked(), button.place_forget(), button3.place_forget()], fg = "red", bg="#80ff80", width = 20)
+    # ボタンの配置
+    button.place(relx = 0.4, rely = 0.9)
+
+    
+
+    #ルール説明
+    rule = '''\
+    ・プレイヤーはディーラー（胴元）との間で1対1の勝負を行う。
+    ・各プレイヤーの目標は、21を超えないように手持ちのカードの点数の合計を21に近づけ、その点数がディーラーを上回ることである。
+    ・各プレイヤーが初めの賭け（ベット）を終えると、ディーラーはカードを自分自身を含めた参加者全員に2枚ずつ配る。
+    ・ディーラーの2枚のカードのうちの1枚は表向き（アップカード）にされ、皆が見ることができる。もう1枚のカードは伏せられている。
+    ・伏せられたカードをホールカードと呼ぶ。
+    ・プレイヤーの行動が全て終わった時点ではじめてディーラーの2枚目のカードが表向きにされる。
+    ・プレイヤーとディーラー、双方が21の場合には引き分けとなる。
+    ・次のステップでは、プレイヤーはヒットまたはスタンドの選択を行う。
+    ・ヒット (Hit) カードをもう1枚引く。スタンド (Stand) カードを引かずにその時点の点数で勝負する。
+    ・プレイヤーは21を超えなければ何回でもヒットすることができる。
+    ・21を超えてしまうことをバスト（bust）と呼び、直ちにプレイヤーの負けとなる。
+    ・プレイヤーが全員スタンドするとディーラーは自分のホールカードを開く。
+    ・ディーラーは、自分の手が17以上になるまでカードを引かなければならず、17以上になったら、その後は追加のカードを引くことはできない。
+    ・ディーラーが21を超えた場合には、スタンドしたプレイヤーは全員勝利である。プレイヤーとディーラーが同じ点数の場合には引き分けとなる。''' 
+
+    #ルールボタン押した時の動き
+    def button3_clicked():
+        #最初の画面に戻る
+            def return_view():
+                root_new.destroy()
+
+            root_new = tkinter.Tk()
+            # 画面サイズ
+            root_new.geometry('850x500')
+            #画面タイトル
+            root_new.title(u"ルール")
+            # ラベル
+            lbl_filename = tkinter.Label(root_new, text=rule, anchor='e', justify='left')
+            lbl_filename.place(x=10, y=70)
+            # ボタン
+            btn_return = tkinter.Button(root_new, text='ゲームに戻る', command=return_view)
+            btn_return.place(relx=0.5, rely=0.9)
+            root_new.mainloop()
+
+    #ルールボタンの作成
+    button3 = tkinter.Button(app, text = "Rule",command = lambda:[button3_clicked(), button3.place_forget(), button.place_forget()])
+    button3.place(relx = 0.6, rely = 0.9)
+   
+    #はじめに戻るボタンの作成
+    restart_btn = tkinter.Button(app, text = "Restart",command = restart)
+    restart_btn.place(relx = 0.9, rely = 0.9)
+            
+    app.mainloop()
+
+
+
+if __name__ == '__main__':
+    def restart():
+        players_sum.clear()
+        dealers_sum.clear()
+        app.destroy()
+        vp_start_gui()
+
+
+    vp_start_gui()
